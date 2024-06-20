@@ -6,9 +6,11 @@
 //
 
 import PhotosUI
+import StoreKit
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.requestReview) var requestView
     @State private var pickerItems = [PhotosPickerItem]()
     @State private var selectedImages = [Image]()
 
@@ -35,6 +37,10 @@ struct ContentView: View {
             
             ShareLink(item: example, preview: SharePreview("House", image: example)) {
                 Label("Click to share", systemImage: "airplane")
+            }
+            
+            Button ("Leave a review") {
+                requestView()
             }
         }
         .onChange(of: pickerItems) {
