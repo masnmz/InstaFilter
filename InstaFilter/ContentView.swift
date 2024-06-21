@@ -17,7 +17,8 @@ struct ContentView: View {
     @State private var selectedItem: PhotosPickerItem?
     @State private var showingFilters = false
     
-    
+    @AppStorage("filterCount") var filterCount = 0
+    @Environment(\.requestReview) var requestView
     
     @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
     
@@ -28,20 +29,24 @@ struct ContentView: View {
             VStack {
                 Spacer()
                 
-                PhotosPicker(selection: $selectedItem) {
+                HStack {
+                    PhotosPicker(selection: $selectedItem) {
+                        
+                        if let processedImage {
+                            processedImage
+                                .resizable()
+                                .scaledToFit()
+                        } else {
+                            ContentUnavailableView("No Picture", systemImage: "photo.badge.plus", description: Text("Tap to import a photo"))
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .onChange(of: selectedItem, loadImage)
                     
-                    
-                    if let processedImage {
-                        processedImage
-                            .resizable()
-                            .scaledToFit()
-                    } else {
-                        ContentUnavailableView("No Picture", systemImage: "photo.badge.plus", description: Text("Tap to import a photo"))
+                    if processedImage == nil {
+                        ContentUnavailableView("Use Camera", systemImage: "camera", description: Text("Tap to take a photo"))
                     }
                 }
-                .buttonStyle(.plain)
-                .onChange(of: selectedItem, loadImage)
-                
                 
                 Spacer()
                 
@@ -56,8 +61,9 @@ struct ContentView: View {
                     
                     Spacer()
                     
-                    //                share the picture
-                    
+                    if let processedImage {
+                        ShareLink(item: processedImage, preview: SharePreview("Instafilter image", image: processedImage))
+                    }
                     
                 }
             }
@@ -113,9 +119,15 @@ struct ContentView: View {
         processedImage = Image(uiImage: uiImage)
     }
     
-    func setFilter(_ filter: CIFilter) {
+    @MainActor func setFilter(_ filter: CIFilter) {
         currentFilter = filter
         loadImage()
+        
+        filterCount += 1
+        
+        if filterCount >= 3 {
+            requestView()
+        }
     }
 }
 
