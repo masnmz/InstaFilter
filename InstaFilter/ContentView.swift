@@ -48,6 +48,8 @@ struct ContentView: View {
                         ContentUnavailableView("Use Camera", systemImage: "camera", description: Text("Tap to take a photo"))
                     }
                 }
+                .background(Color.white.opacity(0.7))
+                .foregroundStyle(.black)
                 
                 Spacer()
                 
@@ -144,6 +146,7 @@ struct ContentView: View {
         
         if filterCount >= 3 {
             requestView()
+            filterCount = 0
         }
     }
 }
