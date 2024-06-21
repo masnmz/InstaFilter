@@ -14,6 +14,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var processedImage: Image?
     @State private var filterIntensity = 0.5
+    @State private var filterRadius = 0.5
     @State private var selectedItem: PhotosPickerItem?
     @State private var showingFilters = false
     
@@ -52,9 +53,17 @@ struct ContentView: View {
                 
                 HStack {
                     Text("Intensity")
-                    Slider(value: $filterIntensity)
+                    Slider(value: $filterIntensity, in: 0...1)
                         .onChange(of:filterIntensity, applyProcessing)
                 }
+                .disabled(processedImage == nil)
+                
+                HStack {
+                    Text("Radius")
+                    Slider(value: $filterRadius, in: 0...100)
+                        .onChange(of:filterRadius, applyProcessing)
+                }
+                .disabled(processedImage == nil)
                 
                 HStack {
                     Button("Change Filter", action: changeFilter)
@@ -66,8 +75,11 @@ struct ContentView: View {
                     }
                     
                 }
+                .disabled(processedImage == nil)
             }
             .padding([.horizontal, .bottom])
+            .background(LinearGradient(colors: [.cyan, .black], startPoint: .topLeading, endPoint: .bottomTrailing))
+            .preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
             .navigationTitle("InstaFilter")
             .confirmationDialog("Select a Filter", isPresented: $showingFilters) {
                 Button("Crystallize") { setFilter(CIFilter.crystallize())}
@@ -77,6 +89,10 @@ struct ContentView: View {
                 Button("Unsharp Mask") { setFilter(CIFilter.unsharpMask())}
                 Button("Sepia Tone") { setFilter(CIFilter.sepiaTone())}
                 Button("Vignette") { setFilter(CIFilter.vignette())}
+                Button("Bookeh Blur") { setFilter(CIFilter.bokehBlur())}
+                Button("Comic Effect") { setFilter(CIFilter.comicEffect())}
+                Button("Gloom") { setFilter(CIFilter.gloom())}
+                Button("Pointillize") { setFilter(CIFilter.pointillize())}
                 Button("Cancel", role: .cancel) { }
             }
         }
@@ -105,7 +121,7 @@ struct ContentView: View {
         }
         
         if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey)
+            currentFilter.setValue(filterRadius, forKey: kCIInputRadiusKey)
         }
         
         if inputKeys.contains(kCIInputScaleKey) {
