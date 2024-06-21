@@ -67,6 +67,7 @@ struct ContentView: View {
                 
                 HStack {
                     Button("Change Filter", action: changeFilter)
+                        .foregroundStyle(.blue)
                     
                     Spacer()
                     
