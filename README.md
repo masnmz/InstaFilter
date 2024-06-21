@@ -19,10 +19,12 @@ For instance, The "SepiaTone" filter has only intensity, so only the intensity s
 ![Simulator Screen Recording - iPhone 15 Pro Max - 2024-06-21 at 15 29 18](https://github.com/masnmz/InstaFilter/assets/101047936/24d41e67-9025-49eb-863b-a7084dbc1ea9)
 
 Users tap the change filter to change the filter with one of the available filters. 
+
 ![Simulator Screen Recording - iPhone 15 Pro Max - 2024-06-21 at 15 38 51](https://github.com/masnmz/InstaFilter/assets/101047936/e8b0e8d8-5de4-4a54-995b-f12dcaf468a5)
 
 As seen below, The Gloom filter supports both intensity and radius parameters to apply the filter to the uploaded photo.
 Users could arrange both parameters to apply the filter as they want. Users could share the filter-applied photo by tapping the share button
+
 ![Simulator Screen Recording - iPhone 15 Pro Max - 2024-06-21 at 15 41 31](https://github.com/masnmz/InstaFilter/assets/101047936/fef76b0c-6512-42f1-94a2-7bb454686734)
 
 When users apply 20 filters in the app, the AppStore review request is shown to the user to make a review to the InstaFilter
