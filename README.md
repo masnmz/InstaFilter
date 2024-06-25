@@ -28,6 +28,7 @@ Users could arrange both parameters to apply the filter as they want. Users coul
 ![Simulator Screen Recording - iPhone 15 Pro Max - 2024-06-21 at 15 41 31](https://github.com/masnmz/InstaFilter/assets/101047936/fef76b0c-6512-42f1-94a2-7bb454686734)
 
 When users apply 20 filters in the app, the AppStore review request is shown to the user to make a review to the InstaFilter
+
 ![Simulator Screen Recording - iPhone 15 Pro Max - 2024-06-21 at 15 46 13](https://github.com/masnmz/InstaFilter/assets/101047936/ae34530a-1780-44eb-85f2-8aa298071ba7)
 
 
